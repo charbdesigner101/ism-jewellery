@@ -11,10 +11,16 @@ collections_config:
   data:
     path: _data
     output: false
-    icon: insert_chart_outlined
+    description: ''
+    icon: 3d_rotation
+    _editables:
+    _inputs:
+    _select_data:
+    _structures:
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
+    schemas:
   pages:
     path: pages
     output: true
@@ -23,19 +29,31 @@ collections_config:
       exclude:
         - 404.html
         - components.html
+    description: hello
     icon: description
+    _editables:
+    _inputs:
+    _select_data:
+    _structures:
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
     schemas:
       default:
         path: src/schemas/page.html
+        reorder_inputs: true
+        hide_extra_inputs: false
+        remove_empty_inputs: false
+        remove_extra_inputs: true
+        icon: notes
 _inputs:
   favicon:
     type: image
+    cascade: true
   arrow:
     type: select
     options:
+      allow_empty: true
       values:
         - name: Up
           id: up
@@ -45,10 +63,13 @@ _inputs:
           id: down
         - name: Left
           id: left
+    cascade: true
   color:
+    type: auto
     comment: >-
       Choose a custom icon color (if the icon is an svg) and rounded border
       color (if one is included)
+    cascade: true
   icon_size:
     type: choice
     options:
@@ -58,15 +79,14 @@ _inputs:
           id: small
         - name: Large
           id: large
+    cascade: true
   default_color:
+    type: checkbox
     comment: >-
       Use the original colors of the icon without overriding them (does not
       apply to the border if one is included)
-    type: checkbox
+    cascade: true
   icon_type:
-    comment: >-
-      Choose outline if you want lines to be filled with color and solid if you
-      want the whole image filled with color
     type: choice
     options:
       allow_empty: false
@@ -75,25 +95,34 @@ _inputs:
           id: solid
         - name: Outline
           id: outline
+    comment: >-
+      Choose outline if you want lines to be filled with color and solid if you
+      want the whole image filled with color
+    cascade: true
   icon_path:
     type: image
+    cascade: true
   variant:
     type: select
     options:
+      allow_empty: true
       values:
         - name: Primary
           id: primary
         - name: Secondary
           id: secondary
+    cascade: true
   arrangement:
     type: select
-    comment: The layout of the icon and text together
     options:
+      allow_empty: true
       values:
         - name: Inline
           id: inline
         - name: Stacked
           id: stacked
+    comment: The layout of the icon and text together
+    cascade: true
   image_alignment:
     type: choice
     options:
@@ -105,72 +134,104 @@ _inputs:
         - name: Right
           id: right
           icon: align_horizontal_right
+    cascade: true
   layout:
+    type: auto
     hidden: true
+    cascade: true
   eleventyExcludeFromCollections:
+    type: auto
     hidden: true
+    cascade: true
   draft:
     type: switch
     comment: If this is switched on, this page will not appear on the live site
+    cascade: true
   page_description:
+    type: auto
     comment: If empty, defaults to the description set in the SEO data file
+    cascade: true
   featured_image:
+    type: auto
     comment: If empty, defaults to the image set in the SEO data file
+    cascade: true
   nav_logo_image:
+    type: auto
     comment: >-
       If an image is uploaded it will be used over a name set in the logo text
       field
+    cascade: true
   logo_text:
+    type: auto
     comment: >-
       If an image is set in the logo image field, this value will not be used.
       You can change the font of a text based logo in data/theme.
+    cascade: true
   footer_logo_image:
+    type: auto
     comment: >-
       If an image is uploaded it will be used over a name set in the logo text
       field.       Please note, the footer image has a fixed width size but not
       a fixed height
+    cascade: true
   footer_content:
     type: markdown
     options:
-      link: true
-      bold: true
-      italic: true
-      undo: true
-      redo: true
+      allow_resize: true
+      allow_custom_markup: false
+      remove_custom_markup: false
       initial_height: 135
+      bold: true
+      image_size_attributes: true
+      italic: true
+      link: true
+      redo: true
+      undo: true
+    cascade: true
   font:
+    type: auto
     comment: >-
       Write the name of any font from
       [https://fonts.google.com/](https://fonts.google.com/) in data/fonts to
       access it here
+    cascade: true
   description:
     type: markdown
     options:
-      link: true
-      bold: true
-      italic: true
-      undo: true
-      redo: true
+      allow_resize: true
+      allow_custom_markup: false
+      remove_custom_markup: false
       initial_height: 135
+      bold: true
+      image_size_attributes: true
+      italic: true
+      link: true
+      redo: true
+      undo: true
+    cascade: true
   contact_details[*].text:
     type: markdown
     options:
-      link: true
-      bold: true
-      italic: true
-      undo: true
-      redo: true
+      allow_resize: true
+      allow_custom_markup: false
+      remove_custom_markup: false
       initial_height: 135
+      bold: true
+      image_size_attributes: true
+      italic: true
+      link: true
+      redo: true
+      undo: true
+    cascade: true
   content_alignment:
     type: choice
     options:
       allow_empty: false
-      value_key: id
       preview:
-        text:
-          - key: name
         icon:
           - key: icon
+        text:
+          - key: name
       values:
         - name: Left
           id: left
@@ -178,6 +239,8 @@ _inputs:
         - name: Center
           id: center
           icon: format_align_center
+      value_key: id
+    cascade: true
   color_group:
     type: select
     options:
@@ -189,88 +252,125 @@ _inputs:
         icon:
           - key: icon
       values:
-        - &ref_0
-          id: primary
+        - id: primary
           name: Primary
-        - &ref_1
-          name: Secondary
+        - name: Secondary
           id: secondary0
+    cascade: true
   card_color_group:
+    type: select
+    options:
+      allow_empty: true
+      values:
+        - id: primary
+          name: Primary
+        - name: Secondary
+          id: secondary0
     comment: >-
       Choose the color group for the cards in this grid. It is recommended to
       choose a color group different than that of the whole component.
-    type: select
-    options:
-      values:
-        - *ref_0
-        - *ref_1
+    cascade: true
   group_name:
-    hidden: true
+    type: auto
     comment: >-
       This input should be hidden from editors and passed through from the
       radio-group component so that these inputs function correctly
+    hidden: true
+    cascade: true
   nav_color_group:
+    type: select
+    options:
+      allow_empty: true
+      values:
+        - id: primary
+          name: Primary
+        - name: Secondary
+          id: secondary0
     comment: Choose the color group for the navigation header
-    type: select
-    options:
-      values:
-        - *ref_0
-        - *ref_1
+    cascade: true
   footer_color_group:
-    comment: Choose the color group for the footer
     type: select
     options:
+      allow_empty: true
       values:
-        - *ref_0
-        - *ref_1
+        - id: primary
+          name: Primary
+        - name: Secondary
+          id: secondary0
+    comment: Choose the color group for the footer
+    cascade: true
   primary_color_group:
+    type: auto
     comment: The default color group for styling site components
+    cascade: true
   primary_color_group.name:
+    type: auto
+    label: Group Name
     comment: Change the name of the default color group to easily identify it later
-    label: Group Name
+    cascade: true
   primary_color_group.background_color:
+    type: auto
     comment: The background color of site components
+    cascade: true
   primary_color_group.foreground_color:
-    comment: The color of text, icons and borders
+    type: auto
     label: Text Color
+    comment: The color of text, icons and borders
+    cascade: true
   primary_color_group.interaction_color:
+    type: auto
     comment: >-
       The color for user interactions, for example focusing on text inputs or
       clicking buttons
+    cascade: true
   custom_color_groups:
+    type: auto
     comment: Define different color groups here to easily style site components
+    cascade: true
   custom_color_groups[*].name:
-    comment: Give your color group a name to easily identify it later
+    type: auto
     label: Group Name
+    comment: Give your color group a name to easily identify it later
+    cascade: true
   custom_color_groups[*].background_color:
+    type: auto
     comment: The background color of site components
+    cascade: true
   custom_color_groups[*].foreground_color:
-    comment: The color of text, icons and borders
+    type: auto
     label: Text Color
+    comment: The color of text, icons and borders
+    cascade: true
   custom_color_groups[*].interaction_color:
+    type: auto
     comment: >-
       The color for user interactions, for example focusing on text inputs or
       clicking buttons
+    cascade: true
   id:
+    type: auto
     comment: >-
       An optional unique identifier to link to this component (with page#id
       where id is what you set in this field)
+    cascade: true
   heading_font:
+    type: auto
     comment: >-
       Write the name of any font from
       [https://fonts.google.com/](https://fonts.google.com/) in data/fonts to
       access it here
+    cascade: true
   content_font:
+    type: auto
     comment: >-
       Write the name of any font from
       [https://fonts.google.com/](https://fonts.google.com/) in data/fonts to
       access it here
+    cascade: true
   hero_library_icon_name:
-    comment: >-
-      Visit [https://heroicons.com/](https://heroicons.com/) to see the full
-      library
     type: select
     options:
+      allow_empty: true
       values:
         - academic-cap
         - adjustments-horizontal
@@ -564,23 +664,28 @@ _inputs:
         - wrench
         - x-circle
         - x-mark
-  hero:
     comment: >-
-      If a hero is not explicitly included, the default is to display the page
-      title
+      Visit [https://heroicons.com/](https://heroicons.com/) to see the full
+      library
+    cascade: true
+  hero:
     type: object
     options:
       structures: _structures.hero_blocks
+    comment: >-
+      If a hero is not explicitly included, the default is to display the page
+      title
+    cascade: true
   show_note:
     type: switch
     comment: >-
       Hide/Show the note that contains helpful information about the live
       editing of this component
-_select_data: {}
+    cascade: true
 _structures:
   content_blocks:
     style: modal
-_editables: {}
+base_url: xdvsdfsdfds
 data_config:
   fonts: true
 timezone: Etc/UTC
